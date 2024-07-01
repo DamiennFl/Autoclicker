@@ -5,8 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Autoclicker"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="650">
+        Title="Autoclicker"
+        Height="500" Width="650">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="57*"/>
+            <ColumnDefinition Width="593*"/>
+        </Grid.ColumnDefinitions>
 
     </Grid>
 </Window>
