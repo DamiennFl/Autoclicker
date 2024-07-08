@@ -19,7 +19,6 @@ namespace Autoclicker
         public MainWindow()
         {
             InitializeComponent();
-
             DataContext = this;
 
         }
