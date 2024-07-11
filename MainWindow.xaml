@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Autoclicker"
+        xmlns:src="clr-namespace:Autoclicker"
         mc:Ignorable="d"
         Title="Autoclicker"
         Height="400" Width="500" ResizeMode="CanMinimize"
@@ -19,13 +20,15 @@
         </Grid.ColumnDefinitions>
         <GroupBox Header="Click Interval" Margin="10,10,10,294" Grid.ColumnSpan="2">
             <Grid HorizontalAlignment="Left" Width="482">
-                <TextBox HorizontalAlignment="Left" Margin="112,0,0,0" TextAlignment="Right" TextWrapping="Wrap" Text="{Binding Path=HoursValue}" VerticalAlignment="Center" Width="47" TextChanged="TextBox_TextChanged_1"/>
-                <Label Content="hours" HorizontalAlignment="Left" Margin="58,0,0,0" VerticalAlignment="Center" Width="49"/>
-                <TextBox HorizontalAlignment="Left" Margin="10,0,0,0" TextAlignment="Right" TextWrapping="Wrap" Text="{Binding Path=MinutesValue}" VerticalAlignment="Center" Width="48" TextChanged="TextBox_TextChanged_2"/>
-                <Label Content="minutes" HorizontalAlignment="Left" Margin="159,0,0,0" VerticalAlignment="Center" Width="58"/>
-                <TextBox Width="47" VerticalAlignment="Center" Text="{Binding Path=SecondsValue}" TextWrapping="Wrap" TextAlignment="Right" TextChanged="TextBox_TextChanged_3" Margin="222,0,0,0" HorizontalAlignment="Left"/>
-                <Label Width="58" VerticalAlignment="Center" Margin="269,0,0,0" HorizontalAlignment="Left" Content="seconds"/>
-                <TextBox Width="47" VerticalAlignment="Center" Text="{Binding Path=MillisecondsValue}" TextWrapping="Wrap" TextAlignment="Right" TextChanged="TextBox_TextChanged_4" Margin="327,0,0,0" HorizontalAlignment="Left"/>
+                <TextBox MaxWidth="47" Width="47" VerticalAlignment="Center" PreviewTextInput="NumberValidationTextBox" TextWrapping="NoWrap" TextAlignment="Right" TextChanged="TextBox_TextChanged_4" Margin="327,0,0,0" HorizontalAlignment="Left">
+                    <TextBox.Text>
+                        <Binding Path="MillisecondsValue" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <src:OnlyNumbersRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
                 <Label Width="75" VerticalAlignment="Center" Margin="374,0,0,0" HorizontalAlignment="Left" Content="milliseconds"/>
             </Grid>
         </GroupBox>

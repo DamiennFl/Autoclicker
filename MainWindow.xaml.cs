@@ -8,6 +8,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Text.RegularExpressions;
+using System.Globalization;
 
 namespace Autoclicker
 {
@@ -16,10 +18,14 @@ namespace Autoclicker
     /// </summary>
     public partial class MainWindow : Window
     {
+        public int MillisecondsValue { get; set; }
+
         public MainWindow()
         {
+
             InitializeComponent();
             DataContext = this;
+
 
         }
 
@@ -41,5 +47,29 @@ namespace Autoclicker
         {
 
         }
+
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
     }
+
+    public class OnlyNumbersRule : ValidationRule
+    {
+        public override ValidationResult Validate(object value, System.Globalization.CultureInfo cultureInfo)
+        {
+            if (value != null)
+            {
+                string strValue = value.ToString();
+                int result;
+                if (int.TryParse(strValue, out result))
+                {
+                    return new ValidationResult(true, null);
+                }
+            }
+            return new ValidationResult(false, "Please enter a number.");
+        }
+    }
+
 }
